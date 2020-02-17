@@ -29,7 +29,7 @@ export class Insert extends Component {
     handleSubmit(e){
         e.preventDefault()
         // alert(`${this.state.firstname}, ${this.state.lastname}, ${this.state.email}`)
-        const obj = {
+        let obj = {
             firstname: this.state.firstname,
             lastname: this.state.lastname,
             email: this.state.email
