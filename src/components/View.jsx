@@ -1,42 +1,32 @@
 import React, { Component } from 'react'
-import axios from 'axios'
 import RecordsList from './RecordsList'
+import Axios from 'axios'
 
 export class View extends Component {
     constructor(props) {
         super(props)
-
-        this.usersList = this.usersList.bind(this)
-
-        this.state = {
-            students: [] 
-        }
-
-    }
     
+        this.state = {
+             students: []
+        }
+    }
+
     componentDidMount(){
-        axios.get('http://localhost/ReactPHPCRUD/list.php')
+        Axios.get('http://localhost/ReactPHPCRUD/list.php')
         .then(response => {
-            this.setState({students: response.data})
+            this.setState({students: response.data}) 
         })
-        .catch(function (error){
+        .catch((error) => {
             console.log(error)
         })
     }
-
-    usersList =() => {
-        this.state.students.map(item => {
-            return <RecordsList obj={item} key={item.id}/>
-        })
-    }
-
-    
 
     render() {
         return (
             <div>
                 <h3 align="center">Users List</h3>
-                <table className="table table-striped" style={{marginTop:20}}>
+                <table className="table table-striped"
+                style={{marginTop:20}}>
                     <thead>
                         <tr>
                             <th>First Name</th>
@@ -47,10 +37,14 @@ export class View extends Component {
                     </thead>
                     <tbody>
                         {
-                            this.usersList
+                            this.state.students.map(item => {
+                                return <RecordsList key={item.id} obj={item}/>
+                            })
+                            
                         }
                     </tbody>
                 </table>
+                
             </div>
         )
     }
